@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is a test page for data input</title>
+    <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+    <script>
+        var num = 0;
+        function addTable(){
+            var tableHtml="";
+            tableHtml += '<tr id="tr'+num+'">'
+            + '<td><input class="addtd" id="col1'+num+'" style="width: 150px;" type="text" name="id" /> </td>'
+            + '<td><input class="addtd" id="col2'+num+'" style="width: 150px;" type="text" name="tag" /> </td>'
+            + '<td><input class="addtd" id="col3'+num+'" style="width: 150px;" type="text" name="time" /> </td>'
+            + '<td><input class="addtd" id="col4'+num+'" style="width: 150px;" type="text" name="value" /> </td>'
+            + '<td><a id="delete'+num+'" class="delete" style="cursor: pointer; color: blue;" onclick="removeTr('+num+')">delete</a>'+' | '
+                +'<a id="edit'+num+'" class="edit" style="cursor: pointer;color: blue;" onclick="editDataByOne('+num+')">edit</a>'+' | '
+                +'<a id="save'+num+'" class="save" style="cursor: pointer;color: blue;" onclick="saveByOne('+num+')">save</a>'
+                +'</td>'
+            +'</tr>';
+
+            var elements = $("#myTable").children().length;
+
+            $("#myTable").children().eq(elements-1).after(tableHtml);
+            num++;
+        }
+
+        function removeTr(trNum){
+            $("#tr"+trNum).remove();
+        }
+
+        function editDataByOne(trNum) {
+            $this = $("#tr"+trNum);
+            $(".addtd",$this).removeAttr("readonly");
+        }
+
+        function saveByOne(trNum) {
+            $this = $("#tr"+trNum);
+            $(".addtd",$this).attr("readonly","readonly");
+        }
+
+        function formateDateTime(date){
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? ('0' + m) : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            var h = '00';
+            var minute = '00';
+            var second='00';
+            return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+        }
+
+        function tableToJsonObjectList(){
+            var msg = $("#myForm").serialize();
+            msg = decodeURIComponent(msg,true).replace(new RegExp("\\+","g")," ");
+            console.log(msg);
+            var list = new Array();
+            var json = new Object();
+            var msg2 = msg.split("&");
+            var t = false;
+            for(var i = 0; i < msg2.length; i++){
+                var msg3 = msg2[i].split("=");
+                if(msg3[0] == "id"){
+                    json.id = msg3[1];
+                }else if(msg3[0] == "tag"){
+                    json.tag = msg3[1];
+                }else if(msg3[0] == "time"){
+                    json.time = formateDateTime(new Date(msg3[1]));
+                }else if(msg3[0] == "value"){
+                    json.value = parseFloat(msg3[1]);
+                    list.push(json);
+                    console.log(json);
+                    json = new Object();
+                }
+            }
+            console.log(JSON.stringify(list));
+            return list;
+        }
+
+        function judgeTagType(){
+           var tag;
+           var tagValue;
+           tag = $("#tagTypeSelect option:checked").text();
+           if(tag == "POWER") tagValue = "CurkWhRec";
+           if(tag == "STEAM") tagValue = "TotalVaporFlow";
+           return tagValue;
+        }
+
+        function judgeTimeType(){
+            var time;
+            var timeValue;
+            time = $("#timeTypeSelect option:checked").text();
+            if(time == "DAY") timeValue = "day";
+            if(time == "MONTH") timeValue = "month";
+            return timeValue;
+        }
+
+        function save(){
+
+            var tag = judgeTagType();
+
+            var time = judgeTimeType();
+
+            var objectList = tableToJsonObjectList();
+
+            var resultObject = {tagFlag:tag,timeType:time,list:objectList};
+
+            // var jsonStr = `{tagFlag:${tag},timeType:${time},list:[${list}]}`;
+
+            console.log(resultObject);
+
+            console.log(JSON.stringify(resultObject));
+
+            $.ajax({
+                type: "POST",
+                url: "http://172.30.83.108/gateway/dataCacheServer/dataCanal/processDataDependingOnTag",
+                dataType: "json",
+                data: JSON.stringify(resultObject),
+                contentType: "application/json;charset-utf-8",
+                success: function(data){
+                    alert(data.message);
+                },
+                error: function(data){
+                    alert(data.message);
+                }
+
+            });
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <h1 id = "head" align="center">Data Input Table</h1>
+    <p id = "info" align="left">Please write information in the blank of the table, and do not forget to click the button to submit</p>
+    <br>
+    <lable>MeasureTagType:</lable>
+    <select id="tagTypeSelect">
+        <option value="STEAM">STEAM</option>
+        <option value="POWER" selected="selected">POWER</option>
+    </select>
+
+    <label>TimeType:</label>
+    <select id="timeTypeSelect">
+        <option value="MONTH">MONTH</option>
+        <option value="DAY" selected="selected">DAY</option>
+    </select>
+    <br>
+    <form role="role" class="my_form" id="myForm">
+        <div class="item" align="center" style="margin: 12px;">
+            <table boder="2" style="text-align: center;" width="100%" id="myTable">
+                <tr>
+                    <th width="150px;">id</th>
+                    <th width="150px;">measureTag</th>
+                    <th width="150px;">time</th>
+                    <th width="150px;">value</th>
+                    <th width="150px;">operation</th>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <br>
+    <input id="addRowButton" type="button" value="AddRow" onclick="addTable();" />
+    <input id="submitButton" type="button" value="Submit" onclick="save();" />
+</body>
+</html>

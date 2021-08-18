@@ -1,0 +1,319 @@
+
+<configuration>
+
+	<property>
+		<name>alluxio.user.file.writetype.default</name>
+		<value>CACHE_THROUGH</value>
+	</property>
+
+	<property>
+		<name>dfs.domain.socket.path</name>
+		<value>/var/lib/hadoop-hdfs/dn_socket</value>
+	</property>
+
+	<property>
+		<name>fs.AbstractFileSystem.alluxio.impl</name>
+		<value>fs.AbstractFileSystem.alluxio.impl</value>
+	</property>
+
+	<property>
+		<name>fs.alluxio-ft.impl</name>
+		<value>alluxio.hadoop.FaultTolerantFileSystem</value>
+	</property>
+
+	<property>
+		<name>fs.alluxio.impl</name>
+		<value>alluxio.hadoop.FileSystem</value>
+	</property>
+
+	<property>
+		<name>hbase.bucketcache.ioengine</name>
+		<value>offheap</value>
+	</property>
+
+	<property>
+		<name>hbase.bucketcache.size</name>
+		<value>10240</value>
+	</property>
+
+	<property>
+		<name>hbase.bulkload.staging.dir</name>
+		<value>/apps/hbase/staging</value>
+	</property>
+
+	<property>
+		<name>hbase.client.keyvalue.maxsize</name>
+		<value>1048576</value>
+	</property>
+
+	<property>
+		<name>hbase.client.retries.number</name>
+		<value>35</value>
+	</property>
+
+	<property>
+		<name>hbase.client.scanner.caching</name>
+		<value>100</value>
+	</property>
+
+	<property>
+		<name>hbase.cluster.distributed</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hbase.coprocessor.master.classes</name>
+		<value>org.apache.hadoop.hbase.security.access.AccessControllerManager</value>
+	</property>
+
+	<property>
+		<name>hbase.coprocessor.region.classes</name>
+		<value>org.apache.hadoop.hbase.security.token.TokenProvider,org.apache.hadoop.hbase.security.access.SecureBulkLoadEndpoint,org.apache.hadoop.hbase.security.access.AccessControllerManager</value>
+	</property>
+
+	<property>
+		<name>hbase.coprocessor.regionserver.classes</name>
+		<value>org.apache.hadoop.hbase.security.access.AccessControllerManager</value>
+	</property>
+
+	<property>
+		<name>hbase.defaults.for.version.skip</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hbase.hregion.majorcompaction</name>
+		<value>604800000</value>
+	</property>
+
+	<property>
+		<name>hbase.hregion.majorcompaction.jitter</name>
+		<value>0.50</value>
+	</property>
+
+	<property>
+		<name>hbase.hregion.max.filesize</name>
+		<value>10737418240</value>
+	</property>
+
+	<property>
+		<name>hbase.hregion.memstore.block.multiplier</name>
+		<value>4</value>
+	</property>
+
+	<property>
+		<name>hbase.hregion.memstore.flush.size</name>
+		<value>134217728</value>
+	</property>
+
+	<property>
+		<name>hbase.hregion.memstore.mslab.enabled</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hbase.hstore.blockingStoreFiles</name>
+		<value>10</value>
+	</property>
+
+	<property>
+		<name>hbase.hstore.compaction.max</name>
+		<value>10</value>
+	</property>
+
+	<property>
+		<name>hbase.hstore.compactionThreshold</name>
+		<value>3</value>
+	</property>
+
+	<property>
+		<name>hbase.http.cas.center</name>
+		<value>https://172.30.92.233:18443/sso</value>
+	</property>
+
+	<property>
+		<name>hbase.http.filter.initializers</name>
+		<value>com.h3c.bigdata.auth.adapter.hbase.HbaseSpnegoFilterInitializer,com.h3c.bigdata.auth.adapter.hbase.HbaseAccessLogFilterInitializer,com.h3c.bigdata.auth.adapter.hbase.HbaseCASFilterInitializer</value>
+	</property>
+
+	<property>
+		<name>hbase.local.dir</name>
+		<value>${hbase.tmp.dir}/local</value>
+	</property>
+
+	<property>
+		<name>hbase.master.info.bindAddress</name>
+		<value>0.0.0.0</value>
+	</property>
+
+	<property>
+		<name>hbase.master.info.port</name>
+		<value>16010</value>
+	</property>
+
+	<property>
+		<name>hbase.master.kerberos.principal</name>
+		<value>hbase/_HOST@HDE.H3C.COM</value>
+	</property>
+
+	<property>
+		<name>hbase.master.keytab.file</name>
+		<value>/etc/security/keytabs/hbase.service.keytab</value>
+	</property>
+
+	<property>
+		<name>hbase.master.port</name>
+		<value>16000</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.global.memstore.size</name>
+		<value>0.4</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.handler.count</name>
+		<value>30</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.info.port</name>
+		<value>16030</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.kerberos.principal</name>
+		<value>hbase/_HOST@HDE.H3C.COM</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.keytab.file</name>
+		<value>/etc/security/keytabs/hbase.service.keytab</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.port</name>
+		<value>16020</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.thrift.http</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hbase.regionserver.wal.codec</name>
+		<value>org.apache.hadoop.hbase.regionserver.wal.WALCellCodec</value>
+	</property>
+
+	<property>
+		<name>hbase.rootdir</name>
+		<value>hdfs://node3.eidp.bigdata.com:8020/apps/hbase/data</value>
+	</property>
+
+	<property>
+		<name>hbase.rpc.protection</name>
+		<value>authentication</value>
+	</property>
+
+	<property>
+		<name>hbase.rpc.timeout</name>
+		<value>90000</value>
+	</property>
+
+	<property>
+		<name>hbase.security.authentication</name>
+		<value>kerberos</value>
+	</property>
+
+	<property>
+		<name>hbase.security.authorization</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hbase.superuser</name>
+		<value>hbase,root,hdfs</value>
+	</property>
+
+	<property>
+		<name>hbase.thrift.kerberos.principal</name>
+		<value>HTTP/_HOST@HDE.H3C.COM</value>
+	</property>
+
+	<property>
+		<name>hbase.thrift.keytab.file</name>
+		<value>/etc/security/keytabs/spnego.service.keytab</value>
+	</property>
+
+	<property>
+		<name>hbase.thrift.security.qop</name>
+		<value>auth</value>
+	</property>
+
+	<property>
+		<name>hbase.thrift.support.proxyuser</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hbase.tmp.dir</name>
+		<value>/hadoop/hbase</value>
+	</property>
+
+	<property>
+		<name>hbase.zookeeper.property.clientPort</name>
+		<value>2181</value>
+	</property>
+
+	<property>
+		<name>hbase.zookeeper.quorum</name>
+		<value>node3.eidp.bigdata.com,node4.eidp.bigdata.com,node5.eidp.bigdata.com</value>
+	</property>
+
+	<property>
+		<name>hbase.zookeeper.useMulti</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hfile.block.cache.size</name>
+		<value>0.4</value>
+	</property>
+
+	<property>
+		<name>phoenix.default.column.encoded.bytes.attrib</name>
+		<value>0</value>
+	</property>
+
+	<property>
+		<name>phoenix.download.location</name>
+		<value>http://172.30.92.233/packages/support/phoenix.tar.gz</value>
+	</property>
+
+	<property>
+		<name>phoenix.query.timeoutMs</name>
+		<value>60000</value>
+	</property>
+
+	<property>
+		<name>phoenix.queryserver.kerberos.principal</name>
+		<value>hbase/_HOST@HDE.H3C.COM</value>
+	</property>
+
+	<property>
+		<name>phoenix.queryserver.keytab.file</name>
+		<value>/etc/security/keytabs/hbase.service.keytab</value>
+	</property>
+
+	<property>
+		<name>zookeeper.session.timeout</name>
+		<value>90000</value>
+	</property>
+
+	<property>
+		<name>zookeeper.znode.parent</name>
+		<value>/hbase-secure</value>
+	</property>
+
+</configuration>

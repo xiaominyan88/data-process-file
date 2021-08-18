@@ -1,0 +1,26 @@
+server:
+  port: 8002
+
+kerberos:
+  version: prod
+
+kafka:
+  bootstrap:
+    servers: XXX.XX.XX.XXX:6667,XXX.XX.XX.XXX:6667,XXX.XX.XX.XXX:6667
+  topic: energy_data_import
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    #表示是否将自己注册进EurekaServer，默认为true
+    register-with-eureka: true
+    #说是否从EurekaServer抓取已有的注册信息，默认为true，单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka:eurekaBigdata@eureka01.prod:8081/eureka,http://eureka:eurekaBigdata@eureka02.prod:8082/eureka,http://eureka:eurekaBigdata@eureka03.prod:8083/eureka
+
+spring:
+  application:
+    name: cloud-data-kafka-service

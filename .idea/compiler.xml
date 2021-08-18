@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="streaming-data-kafka" />
+        <module name="cloud-data-cache-service" />
+        <module name="cloud-data-kafka-standby-service" />
+        <module name="cloud-data-kafka-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cloud-data-cache-service" target="1.8" />
+      <module name="cloud-data-kafka-service" target="1.8" />
+      <module name="cloud-data-kafka-standby-service" target="1.8" />
+      <module name="data-process-file" target="1.8" />
+      <module name="streaming-data-kafka" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
